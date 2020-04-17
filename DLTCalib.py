@@ -59,10 +59,9 @@ def DLT(listOf3Dpoints, listOf2DPoints):
     U,E,V = np.linalg.svd(matrix_Form_Result_Array) 
     #q,r= np.linalg.qr(V)
     
-    
     #unknowns_Params = np.transpose(V)
     #return V
-    return V[-1, :] / V[-1, -1]    
+    return V[:, -1] / V[-1, -1]    
     
 
 def Normalize(dim, points):
@@ -134,6 +133,7 @@ def test():
     
     # Denormalize the points data using the transformation matrix returned from Normalize function 
     H = np.dot( np.dot( np.linalg.pinv(transMatrix2D), H ), transMatrix3D )
+    
     H = H / H[-1, -1]
     #L = np.ndarray.flatten(H)
     
@@ -150,6 +150,7 @@ def test():
 Calib = test()    
 print('Calibration Matrix:', Calib)
      
- 
+# we had some ideas from this Github page 
+# https://github.com/acvictor/DLT/blob/master/DLT.py
      
      
